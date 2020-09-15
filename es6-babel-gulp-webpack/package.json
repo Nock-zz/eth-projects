@@ -1,0 +1,36 @@
+{
+  "name": "es6-babel-gulp-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf ./build && mkdir build",
+    "prebuild": "npm run clean",
+    "build": "webpack",
+    "postbuild": "echo 'Run the code after the build script:' && node ./build/bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "gulp": "^4.0.2",
+    "lite-server": "^2.4.0",
+    "rimraf": "^2.6.2",
+    "kind-of": ">=6.0.3",
+    "minimist": ">=1.2.3",
+    "acorn": ">=6.4.1",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.1.2",
+    "webpack-stream": "^5.1.1",
+    "yargs": "^12.0.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.14",
+    "minimatch": ">=3.0.2",
+    "npx": "^10.2.2"
+  }
+}

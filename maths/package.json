@@ -1,0 +1,48 @@
+{
+  "name": "maths",
+  "version": "1.0.0",
+  "main": "index.js",
+  "module": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "big-integer": "^1.6.43",
+    "esm": "^3.2.20"
+  },
+  "devDependencies": {
+    "prettier-eslint": "^9.0.1",
+    "prettier-eslint-cli": "^5.0.0"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+//    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "rules":{
+        "indent": ["off", 4],
+//        "indent": ["warn", 4],
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "double"]
+     }
+  },
+  "description": "Maths bur also how to use esm module to enable node integration with ES Modules"
+}

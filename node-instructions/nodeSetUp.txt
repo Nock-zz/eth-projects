@@ -1,0 +1,71 @@
+To install follow the instrcutions on nodejs.org
+
+To update node install n
+npm -g install n
+
+To install check for updates install npm-check-updates
+npm -g install node-check-updates
+
+To check for updates run ncu -g -u
+The look at the instrections at the bottom
+sudo npm -g install <module> 
+
+To list installed modules/packages
+npm list -g --depth=0
+OR
+ls -al $(npm root -g)
+
+
+To check the latest version of a package (e.g. n)
+npm view n version
+
+To install the latest version of node use the following offical instructions:
+https://github.com/nodesource/distributions#installation-instructions
+
+
+WARNING - this may be unstable. See - https://davidwalsh.name/upgrade-nodejs
+To install multiple versions including the latest stable version of node install n
+sudo n stable
+
+Instructions for n
+https://github.com/tj/n
+
+To list the install base directory - {prefix} for global installs
+npm -g prefix
+
+To set the install base directory - {prefix} - for global npm installs
+sudo npm config set prefix /usr
+Note that /usr is used but a more common alternative is /usr/local
+
+
+To uninstall you must first uninstall all modules
+
+The uninstall npx and npm
+To uninstall npx or npm
+sudo npm uninstall npx -g
+sudo npm uninstall npm -g
+sudo npm -g uninstall npm@6.4.1
+
+If this is not working then see
+https://docs.npmjs.com/misc/removing-npm
+
+
+To unistall node you must find the path to node global install
+which node - gives the /path/bin/node.
+Then run cd /path
+The most likely {prefix} paths are:
+/usr
+/usr/local
+
+Then run:
+sudo rm -rf bin/node* include/node* lib/node* lib/pkgconfig/nodejs.pc share/man/man1/node*
+
+
+https://amcositsupport.blogspot.com/2016/07/to-completely-uninstall-node-js-from.html
+
+
+
+
+
+
+

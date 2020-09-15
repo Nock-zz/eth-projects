@@ -1,0 +1,15 @@
+ cd kickstart/
+ npm init
+ sudo npm install -g npm@4
+ sudo npm install --save ganache-cli mocha solc fs-extra web3@1.0.0-beta.26
+ sudo npm install --save truffle-hdwallet-provider
+ sudo npm install --save next@4.1.4 react react-dom 
+ sudo npm install --save semantic-ui-react
+ sudo npm install --save semantic-ui-css
+ sudo npm install --save next-routes
+
+
+No errors
+
+
+

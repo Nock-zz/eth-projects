@@ -1,0 +1,510 @@
+Arrays
+------
+An Array is a list of objects.
+It is created by a square bracket notation with the values being separated by commas e.g.:
+let myArrayOfNumbers = [1,3,5,7];
+Arrays are 0 indexed.
+console.log(myArrayOfNumbers[0]) -> 1
+
+You can test an object obj is an array with
+Array.isArray(obj);
+
+Properties
+----------
+Properties are defined on most objects (exception is null or undefined).
+LENGTH
+An array has a property length.
+This can be accessed in two ways:
+myArrayOfNumbers.length -> 4
+or myArrayOfNumbers["length"] -> 4
+
+The first way assumes we are using the literal name after the dot.
+The second way assumes that we must perform an evaluation.
+So, for the second way, we could have used a function inside the square brackets.
+
+let myLength = () => 'length';
+myArrayOfNumbers[myLength()] -> 4 // myLength gets evaluated as 'length';
+
+PUSH AND POP
+If an object contains a property that is also a function then that property is referred to as a Method.
+For example an Array has a property called push.
+We can see it is a function using:
+console.log(typeof myArrayOfNumbers.push) -> function
+Because the push property is a function we refer to it as a method of the array.
+and we can run it with:
+console.log('start', myArrayOfNumbers);
+myArrayOfNumbers.push(9);
+myArrayOfNumbers.push(10);
+console.log('after push()', myArrayOfNumbers);
+myArrayOfNumbers.pop();
+console.log('after pop()', myArrayOfNumbers);
+
+UNSHIFT AND SHIFT (push and pop on the front of an array)
+myArrayOfNumbers.unshift(-10);
+console.log('after unshift()', myArrayOfNumbers);
+myArrayOfNumbers.shift
+console.log('after shift()', myArrayOfNumbers);
+
+INDEXOF and LASTINDEXOF
+Searches through the array from the start to the end and returns the index at
+which the requested value was found—or -1 if it wasn’t found. To search from
+the end instead of the start, there’s a similar method called lastIndexOf .
+
+console.log([1, 2, 3, 2, 1].indexOf(2));
+// → 1
+console.log([1, 2, 3, 2, 1].lastIndexOf(2));
+// → 3
+
+SLICE AND CONCAT
+console.log([0, 1, 2, 3, 4].slice(2, 4));
+// → [2, 3]
+console.log([0, 1, 2, 3, 4].slice(2));
+// → [2, 3, 4]
+When the end index is not given, slice will take all of the elements after the
+start index. You can also omit the start index to copy the entire array.
+console.log([0, 1, 2, 3, 4].slice());
+// → [0, 1, 2, 3, 4]
+
+The concat method can be used to glue arrays together to create a new array,
+similar to what the + operator does for strings.
+
+function remove(array, index) {
+return array.slice(0, index)
+.concat(array.slice(index + 1));
+}
+console.log(remove(["a", "b", "c", "d", "e"], 2));
+// → ["a", "b", "d", "e"]
+
+FOREACH (forEach)
+The forEach method acts like a for / of loop on an array.
+
+[1,2,3,4].forEach(x => console.log(x**2));
+
+
+MAP
+Map takes an anon function to produce a new array with the transformed values.
+
+console.log('map that squares',[1,2,3,4], [1,2,3,4].map((x) => x**2));
+
+FILTER
+Filter takes an anon function which tests true or false and produces a new array with the true values.
+
+console.log('filter even', [1,2,3,4].filter( x => x % 2 == 0));
+
+REDUCE
+Reduce uses an anon function with two parameters - the first to hold the current running result - and the second to hold the
+function that combines the next array value with the running result. It optionally allows for a start value for the
+running result.
+
+console.log('reduce to get product', [1,2,3,4], [1,2,3,4].reduce((product,x) => product*x, 1 )); // , 1 is optional parameter
+
+console.log('reduce to get sum', [1,2,3,4], [1,2,3,4].reduce((sum,x) => sum + x ));
+
+SOME
+Some uses an anon function which tests true or false and if one value of the array tests true - it returns true.
+
+console.log('some to see if there is a number greater than 3', [1,2,3,4], [1,2,3,4].some(x => x>3));
+
+Objects
+-------
+Objects are just collections of properties.
+They can be created with a curly bracket notation with each property given a name and then after a colon a value.
+The different properties are separated by commas so events is separated from squirrel by a comma.
+let day1 = {
+events: ["work", "touched tree", "pizza", "running"],
+squirrel: false
+};
+
+This means that braces have two meanings in JavaScript. At the start of
+a statement, they start a block of statements. In any other position, they
+describe an object. Fortunately, it is rarely useful to start a statement with an
+object in braces, so the ambiguity between these two is not much of a problem.
+
+To briefly return to our tentacle model of bindings—property bindings are
+similar. They grasp values, but other bindings and properties might be holding
+onto those same values. You may think of objects as octopuses with any number
+of tentacles, each of which has a name tattooed on it.
+The delete operator cuts off a tentacle from such an octopus. It is a unary
+operator that, when applied to an object property, will remove the named
+property from the object.
+
+let anObject = {left: 1, right: 2};
+console.log(anObject.left);
+// → 1
+delete anObject.left;
+console.log(anObject.left);
+// → undefined
+console.log("left" in anObject);
+// → false
+console.log("right" in anObject);
+// → true
+
+OBJECT.ASSIGN
+There’s an Object.assign function that copies all properties from one object
+into another.
+let objectA = {a: 1, b: 2};
+Object.assign(objectA, {b: 3, c: 4});
+console.log(objectA);
+// → {a: 1, b: 3, c: 4}
+
+CREATING OBJECTS
+
+Javascript uses prototypes to create an object.
+By default an object will be created from the Object.prototype which is an empty object with some hidden methods.
+The hidden methods are not copied to the new object but the hidden methods will be run if they do not explicitly
+exist on the new object.
+So since the new object is empty - how does it know its prototype?
+Answer - there is a hidden property called [[Prototype]].
+You can find the link back to the prototype of an object with:
+> Object.getPrototypeOf(obj);
+
+The object will contain a link back to its prototype from the hidden [[Prototype]] property or
+ironically by calling the __proto__ property which does not exist on the object but gets called on its prototype
+(and its prototype is found using the hidden [[Prototype]] property!)
+The other hidden properties on the prototype can be found using:
+> Object.getOwnPropertyNames(obj.__proto__);  //depreciated
+>Object.getOwnPropertyNames(Object.getPrototypeOf(obj)); //better
+
+Note that a new Array is created from Array.prototype - which in turn has a reference to Object.prototype.
+And a new function or any function is created from Function.prototype which in turn has a reference to Object.prototype.
+
+
+Objects can be created in a number of ways.
+
+
+1. Literal Notation
+const obj1 = {prop: "value", anotherProp: "anotherValue", someFunction: function(param) {/*do something*/ console.log(param);}};
+
+2. Using new Object();
+
+const objNew = new Object();
+
+2. Using Object.create()
+If you have an object you can use this as the prototype argument of Object.create() and you can add in some properties ad a second argument.
+If you want an empty object then you use Object.prototype as the argument.
+So we have:
+const obj2 = Object.create(obj, {a:{value: "A", writable: true, enumerable: true, configurable: true}});
+Or:
+const obj3 = Object.create(Object.prototype);
+Or (to avoid having any inherited prototype properties):
+const obj4 = Object.create(null);
+
+console.log("obj1:", obj1, obj1.someFunction("someFunction of obj1 says hello"), "obj2:",obj2
+,"someFunction' in obj2:", ('someFunction' in obj2), obj2.someFunction("someFunction of obj2 says hello") ,"obj3:", obj3);
+
+3. Using an old pre ES6 constructor function
+
+function Fox(type) {
+this.type = type;
+}
+Fox.prototype.speak = function(line) {
+console.log(`The ${this.type} fox says '${line}'`);
+};
+
+
+
+let snowFox = new Fox("snow");
+
+snowFox.speak("It's snowing - can you see me?");
+
+4. Using a new ES6 class and constructor
+Note that with the class definition you can only create methods and not properties.
+Note also that these methods are created on the prototype of the class.
+Finally note that they are not enumerable so you have to look for them with:
+> Object.getOwnPropertyNames(Fox0.prototype)
+If you want properties you have to create them on the prototype with a separate statement,
+class Fox0 {
+  constructor(type) {
+  this.type = type;
+  }
+
+  speak(line) {
+  console.log(`The ${this.type} fox (from author ${this.author}) says: ${line}`);
+  }
+}
+
+Fox0.prototype.author = "Nick";
+
+let blackFox = new Fox0("black");
+blackFox.speak("It's dark!");
+
+5. Using a Factory function
+
+function FoxFactory(type) {
+  let _type = type;
+
+  function speak(line) {
+  console.log(`The ${_type} fox says: ${line}`);
+  }
+
+  return {speak};
+
+}
+
+let brownFox = FoxFactory("brown");
+
+brownFox.speak("Hello!");
+
+OBJECT.logAllProperties
+
+A useful function is:
+function logAllProperties(obj) {
+     if (obj == null) return; // recursive approach
+     console.log(obj, `:`, Object.getOwnPropertyNames(obj));
+     logAllProperties(Object.getPrototypeOf(obj));
+}
+
+
+OBJECT.DefineProperty
+
+Object.defineProperty( obj, 'prop', {
+  value: 3,
+  enumerable: false,
+  writable: false,
+  configurable: false
+});
+
+
+
+OBJECTS AND DATA
+Jacques starts up his JavaScript interpreter and sets up the environment
+he needs to keep his journal.
+let journal = [];
+function addEntry(events, squirrel) {
+journal.push({events, squirrel});
+}
+Note that the object added to the journal looks a little odd. Instead of
+declaring properties like <<events: events>> , it just gives a property name <<events>>. This
+is shorthand that means the same thing—if a property name in brace notation
+isn’t followed by a value, its value is taken from the binding with the same
+name.
+
+So Jacques can add entries every day:
+addEntry(["work", "touched tree", "pizza", "running",
+"television"], false);
+addEntry(["work", "ice cream", "cauliflower", "lasagna",
+"touched tree", "brushed teeth"], false);
+addEntry(["weekend", "cycling", "break", "peanuts",
+"beer"], true);
+
+After some time he builds up the entries found in journal.js.
+
+To compute the measure of correlation between two Boolean variables, we
+can use the phi coefficient ( φ ). This is a formula whose input is a frequency
+table containing the number of times the different combinations of the variables
+were observed. The output of the formula is a number between -1 and 1 that
+describes the correlation.
+In this case the first Boolean variable could be one of the events "work", "touched tree", "pizza" ...
+and this would be compared with squirrel transformation being true or false.
+
+So if we took pizza. We can have: No pizza (pizza false) or pizza (pizza true);
+We can compute the phi coefficient as follows:
+
+φ =      n11 n00 − n10n01
+         ____________________
+         √n1• n0• n•1 n•0
+
+Here n11 represents squirrel was true and pizza was true and n00 represents squirrel was false and pizza was false.
+n1. represents total number of squirrel true occurances and n0. represents total number of squirrel false occurrances.
+
+We can represent a two-by-two table in JavaScript with a four-element array
+( [76, 9, 4, 1] ).
+We’ll interpret the indices to the array as two-bit binary numbers, where the leftmost (most significant) digit
+refers to the squirrel variable and the rightmost (least significant) digit refers to the event variable.
+For example, the binary number 10 refers to the case where Jacques did turn into a squirrel, but the event (say, “pizza”) didn’t oc-
+cur. This happened four times. And since binary 10 is 2 in decimal notation,
+we will store this number at index 2 of the array.
+
+function phi(element) {
+    return (element[3]*element[0] - element[2]*element[1])
+    / Math.sqrt(
+    (element[2] + element[3])*
+    (element[0] + element[1])*
+    (element[3] + element[1])*
+    (element[0] + element[2])
+    );
+}
+
+DESTRUCTURING
+Using destructuring we can simplify the function phi above:
+Instead of just having element to represent our number array we can destructure with [n00, n01, n10, n11].
+function phi2([n00, n01, n10, n11])  {
+  return  (n11*n00 - n10*n01)
+    / Math.sqrt(
+    (n10 + n11)*
+    (n00 + n01)*
+    (n11 + n01)*
+    (n00 + n10)
+    );
+}
+
+This destructuring also works for let, const and var.
+let [n00,,,] = [27, 8, 4,1];
+console.log(n00);
+
+Destructuring also works on objects.
+let {events, squirrel} = JOURNAL;
+console.log(events);
+
+REST AND COMPOSITION
+The ... rest parameter binds comma separated arguments to an array.
+
+function max(...numbers) {
+let result = -Infinity;
+for (let number of numbers) {
+if (number > result) result = number;
+}
+return result;
+}
+console.log(max(-2,3,7,4,-10));
+
+This operator can be used to spread an array into a new array:
+
+let words = ["never", "fully"];
+console.log(["never", "fully"], ["will", ...words, "understand"]);
+
+This also works to spread an object into a new object:
+let element = JOURNAL[1]; //{ events:  [ 'bread', 'pudding', 'brushed teeth', 'weekend', 'touched tree' ], squirrel: false }
+console.log('object and new object using spread operator', element, {date: "01/12/2018", ...element, run: 25});
+
+Strings
+-------
+Values of type string, number, and Boolean are not objects, and though
+the language doesn’t complain if you try to set new properties on them, it
+doesn’t actually store those properties. As mentioned earlier, such values are
+immutable and cannot be changed.
+But these types do have built-in properties. Every string value has a number
+of methods. Some very useful ones are slice and indexOf , which resemble the
+array methods of the same name.
+
+SLICE slice, INDEXOF indexOf, FINDINDEX findIndex
+console.log("coconuts".slice(4, 7));
+// → nut
+console.log("coconut".indexOf("u"));
+// → 5
+Note that findIndex is a more general version of indexOf.
+Here you just have to use (c) => c == "u") to the results of indexOf
+console.log("coconut".findIndex((c) => c == "u"));
+
+But you can also use findIndex to lookup information in an array.
+Suppose we have a Lookup array as follows:
+let colorArray = [{color: 'r', colorName: 'red'}, {color: 'g', colorName: 'green'},{color: 'b', colorName: 'blue'}];
+And we have an object Array with the following information:
+let data = [{car: 'Audi', color:'b'}, {car: 'Ford', color: 'g'}];
+let resultArray = [];
+for (let el of data) {
+  let index = colorArray.findIndex((cElement) => cElement.color == el.color);
+  resultArray.push({car: el.car, colorName: colorArray[index].colorName})
+}
+console.log(resultArray);
+
+
+
+One difference is that a string’s indexOf can search for a string containing
+more than one character, whereas the corresponding array method looks only
+for a single element.
+72console.log("one two three".indexOf("ee"));
+// → 11
+The trim method removes whitespace (spaces, newlines, tabs, and similar
+characters) from the start and end of a string.
+console.log("
+// → okay
+okay \n ".trim());
+
+PADSTART padStart
+The zeroPad function from the previous chapter also exists as a method.
+It is called padStart and takes the desired length and padding character as
+arguments.
+console.log(String(6).padStart(3, "0"));
+// → 006
+
+SPLIT split and JOIN join
+You can split a string on every occurrence of another string with split and
+join it again with join .
+let sentence = "Secretarybirds specialize in stomping";
+let words = sentence.split(" ");
+console.log(words);
+// → ["Secretarybirds", "specialize", "in", "stomping"]
+console.log(words.join(". "));
+// → Secretarybirds. specialize. in. stomping
+
+REPEAT repeat
+A string can be repeated with the repeat method, which creates a new string
+containing multiple copies of the original string, glued together.
+console.log("LA".repeat(3));
+// → LALALA
+
+LENGTH length
+We have already seen the string type’s length property. Accessing the indi-
+vidual characters in a string looks like accessing array elements (with a caveat
+that we’ll discuss in Chapter 5).
+let string = "abc";
+console.log(string.length);
+// → 3
+console.log(string[1]);
+// → b
+
+CHARS (charAt, charCodeAt, codePointAt and double byte characters)
+
+If you have a character (which will be a string of one or two code units), you
+can use codePointAt(0) to get its code.
+Luckily - When you use a for /of loop to loop over a string, it gives you real characters, not code units.
+So the you can use codePointAt(0) to get the correct UTF-16 code.
+
+The for/of loop on a string gives you the real characters not the UTF-16 code units.
+console.log('The for/of loop on a string gives you the real characters not the UTF-16 code units');
+let roseDragon = "🌹🐉";
+for (let char of roseDragon) {
+console.log('character', char);
+console.log('charAt (Bad result for double bytes)', char.charAt(0));
+console.log('charCodeAt (Bad result for double bytes)', char.charCodeAt(0));
+console.log('codePointAt', char.codePointAt(0));
+}
+
+The for/in loop on a string messes up and you get the UTF-16 code units
+console.log('The for/in loop on a string messes up and you get the UTF-16 code units');
+//let roseDragon = "🌹🐉";
+for (let charIndex in roseDragon) {
+console.log('charIndex', charIndex);
+console.log('charAt (Bad result for double bytes)', roseDragon[charIndex].charAt(0));
+console.log('charCodeAt (Bad result for double bytes)', roseDragon[charIndex].charCodeAt(0));
+console.log('codePointAt', roseDragon[charIndex].codePointAt(0));
+}
+
+The for loop on a string messes up and gives the UTF-16 code units.
+//let roseDragon = "🌹🐉";
+console.log('The for loop on a string messes up and gives the UTF-16 code units');
+for (let i=0; i < roseDragon.length; ++i) {
+  console.log('character',i, roseDragon[i]);
+}
+
+
+JSON
+----
+We can serialize the data held by bindings in an object. That means it is converted into a
+flat description. A popular serialization format is called JSON (pronounced
+“Jason”), which stands for JavaScript Object Notation. It is widely used as a
+data storage and communication format on the Web, even in languages other
+than JavaScript.
+
+JSON looks similar to JavaScript’s way of writing arrays and objects, with a
+few restrictions. All property names have to be surrounded by double quotes,
+and only simple data expressions are allowed—no function calls, bindings, or
+anything that involves actual computation. Comments are not allowed in
+JSON.
+A journal entry might look like this when represented as JSON data:
+{
+"events": ["work", "touched tree", "pizza", "running"]
+"squirrel": false,
+}
+
+JavaScript gives us the functions JSON.stringify and JSON.parse to convert
+data to and from this format. The first takes a JavaScript value and returns
+a JSON-encoded string. The second takes such a string and converts it to the
+value it encodes.
+let string = JSON.stringify({squirrel: false,
+events: ["weekend"]});
+console.log(string);
+// → {"squirrel":false,"events":["weekend"]}
+console.log(JSON.parse(string).events);
+// → ["weekend"]

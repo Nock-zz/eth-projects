@@ -1,0 +1,16 @@
+
+.Pad {
+  margin: 60px;
+}
+
+
+
+.UserInput {
+
+  margin: 25px;
+  padding: 10px;
+  padding-top: 25px;
+  font-size: large;
+  font-style: italic;
+  color: black;
+}

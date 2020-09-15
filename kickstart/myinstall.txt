@@ -1,0 +1,23 @@
+ 4924  cd kickstart/
+ 4925  npm init
+ 4928  sudo npm install -g npm@4
+ 4929  sudo npm install --save ganache-cli mocha solc fs-extra web3@1.0.0-beta.26
+ 4936  sudo npm install ethereumjs-wallet@0.6.0
+ 4938  sudo npm install --save truffle-hdwallet-provider@0.0.3
+ 4957  sudo npm install --save next@4.1.4 react react-dom 
+ 4965  sudo npm install --save semantic-ui-react
+ 4966  sudo npm install --save semantic-ui-css
+ 4984  sudo npm install --save next-routes
+
+
+got an error with web3 install
+workaround - use npm v4
+so ran: 
+sudo npm install -g npm@4
+then the following command worked:
+sudo npm install --save web3@1.0.0-beta.26
+
+got an error on using npm install as my user gnock has no write permission to /usr/local
+workaround use sudo for all -g npm commands.
+
+

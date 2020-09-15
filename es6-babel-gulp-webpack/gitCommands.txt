@@ -1,0 +1,40 @@
+Some help on git can be found in:
+https://medium.com/flawless-app-stories/useful-git-commands-for-everyday-use-e1a4de64037d
+https://readwrite.com/2013/10/02/github-for-beginners-part-2/
+https://rogerdudler.github.io/git-guide/
+
+
+As global setup you must update git to get the user name (per github) and email address (per github)
+>git config --global user.email "nick.morter@gmail.com"
+>git config --global user.name "Nock-zz"
+
+To make a project available for git - run git init to initialise git for the project
+>git init
+
+Create a repository in github.com (in this example es6-babel-webpack)
+Then associate the local directory with this repository.
+>git remote add origin https://github.com/Nock-zz/es6-babel-webpack.git
+
+
+Create some file
+>echo "# es6-babel-webpack" >> README.md
+Check what is missing from git with:
+>git status
+
+Then add this file to git. To add all files and sub-directories:
+>git add .
+or just the file
+>git add README.md
+
+Now we must commit the changes with a message of "first commit"
+>git commit -m "first commit"
+
+Now we can push the changes to the origin (github es6-babel-webpack repo) and the branch (master)
+The -u is to denote that origin is upstream and therefore the ultimate source of truth.
+It only needs to be set once.
+>git push -u origin master
+
+and later changes can be pushed to github with:
+>git push
+
+Now the github repository will be in synch with the local one.
